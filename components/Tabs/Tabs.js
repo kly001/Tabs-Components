@@ -2,29 +2,32 @@
 class TabLink {
   constructor(element) {
     // Assign this.element to the passed in DOM element
-    // this.element;
     this.element = element;
+    // console.log(this.element)
     // Get the custom data attribute on the Link
-    // this.data;
     this.data = this.element.dataset.tab
+    // console.log(this.data)
     // Using the custom data attribute get the associated Item element
-    // this.itemElement;
-    this.item = document.querySelector(`.tabs-item[data-tab="${this.data}"]`);
+    this.item = document.querySelector(`.tabs-item[data-tab='${this.data}']`);
+    // console.log(this.item)
     // Using the Item element, create a new instance of the TabItem class
-    // this.tabItem;
     this.tabItem = new TabItem(this.item);
+  // console.log(this.item)
     // Add a click event listener on this instance, calling the select method on click
     this.element.addEventListener('click', () => {
       this.select()
+      
     });
 }
 
+
   select() {
     // Get all of the elements with the tabs-link class
-    constlinks = document.querySelectorAll('.tabs-link');
+    const links = document.querySelectorAll('.tabs-link');
+    // console.log(links)
    
     // Using a loop or the forEach method remove the 'tabs-link-selected' class from all of the links
-    Array.from(links).forEach(link => {
+   links.forEach(link => {
       link.classList.remove('tabs-link-selected')
     });
 
@@ -33,9 +36,7 @@ class TabLink {
     this.element.classList.add('tabs-link-selected');
 
     // Call the select method on the item associated with this link
-    this.element.addEventListener("click", () => {
-      this.select()
-    })
+    this.tabItem.select();
   }
 }
 
@@ -44,7 +45,6 @@ class TabItem {
     // Assign this.element to the passed in element
      this.element = element;
   }
-
   select() {
     // Select all ".tabs-item" elements from the DOM
      const items = document.querySelectorAll('.tabs-item'); ;
@@ -71,3 +71,4 @@ class TabItem {
 */
 const  links = document.querySelectorAll('.tabs-link');
  links.forEach(link => new TabLink(link));
+console.log(links);
